@@ -1,7 +1,7 @@
 <template>
     <div class="top">
         <div class="content">
-            <div class="left">
+            <div class="left" @click="clickIndex">
                 <img src="../../assets/images/logo.png" alt="">
                 <p>尚医通 预约挂号统一平台</p>
             </div>
@@ -14,10 +14,16 @@
 
 </template>
 
-<script>
-export default {
-    name: "index"
+<script setup>
+import {useRouter} from 'vue-router'
+
+let $router = useRouter()
+const clickIndex = () => {
+    $router.push({
+        'path': '/'
+    })
 }
+
 </script>
 
 <style lang="scss" scoped>
@@ -50,7 +56,7 @@ export default {
 
       p {
         font-size: 22px;
-        color: #556afe;
+        color: #55a6fe;
       }
     }
 

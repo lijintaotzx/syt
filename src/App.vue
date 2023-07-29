@@ -2,7 +2,7 @@
     <div class="container">
         <HospitalTop/>
         <div class="content">
-            xxx
+            <router-view></router-view>
         </div>
         <HospitalBottom/>
     </div>
@@ -10,8 +10,14 @@
 </template>
 
 <script>
+import MyTest from "@/components/MyTest.vue";
+
+
 export default {
-    name: "App"
+    name: "App",
+    components: {MyTest},
+    setup() {
+    }
 }
 </script>
 

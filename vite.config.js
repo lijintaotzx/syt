@@ -1,7 +1,25 @@
-import { defineConfig } from 'vite'
+import {defineConfig} from 'vite'
 import vue from '@vitejs/plugin-vue'
+import path from "path"
+
 
 // https://vitejs.dev/config/
 export default defineConfig({
-  plugins: [vue()],
+    plugins: [vue()],
+
+    resolve: {
+        // Vite路径别名配置
+        alias: {
+            '@': path.resolve('./src')
+        }
+    },
+    // 配置代理跨域
+    server: {
+        proxy:{
+            '/api':{
+                target: 'http://syt.atguigu.cn',
+                changeOrigin: true,
+            }
+        }
+    }
 })
