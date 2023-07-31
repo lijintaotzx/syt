@@ -35,8 +35,7 @@ const inputChange = async (value, cb) => {
     cb(cbData)
 }
 const goDetail = (item) => {
-    console.log(111, item)
-    $router.push({path: "/hospital"})
+    $router.push({path: "/hospital/register", query: {hoscode: item.hoscode}})
 }
 
 

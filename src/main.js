@@ -10,13 +10,16 @@ import 'element-plus/dist/index.css'
 const app = createApp(App)
 import '@/style/reset.scss'
 import zhCn from 'element-plus/dist/locale/zh-cn.mjs'
+import pinia from '@/store'
 
 app.use(ElementPlus, {
     locale: zhCn,
 })
+
 app.component('HospitalTop', HospitalTop)
 app.component('HospitalBottom', HospitalBottom)
 
 app.use(router);
+app.use(pinia);
 
 app.mount('#app')
