@@ -35,23 +35,68 @@
                     {{ item }}
                 </div>
             </div>
-
+        </div>
+        <div class="department">
+            <div class="leftNav">
+                <ul>
+                    <li v-for="(department, index) in hospitalDetail.hospitalDepartment"
+                        :class="{active:index===currentIndex}"
+                        :key="index"
+                        @click="changeIndex(index, department.children)"
+                    >
+                        {{ department.depname }}
+                    </li>
+                </ul>
+            </div>
+            <div class="departmentInfo">
+                <div class="showDepartment" v-for="department in hospitalDetail.hospitalDepartment">
+                    <h1 class="cur">{{ department.depname }}</h1>
+                    <ul>
+                        <li
+                                v-for="(item, index) in department.children"
+                                :key="item.depcode"
+                                @click="clickDepartment(item)"
+                        >
+                            {{ item.depname }}
+                        </li>
+                    </ul>
+                </div>
+            </div>
         </div>
     </div>
 </template>
 
 <script setup>
 import useDetailStore from "@/store/modules/hospitalDetails.js";
+import useUserStore from "@/store/modules/user.js";
 import {ref} from "vue";
+import {useRoute, useRouter} from "vue-router";
 import hospitalDetails from "@/store/modules/hospitalDetails.js";
 
 let hospitalDetail = useDetailStore();
-
-
+let currentIndex = ref(0)
+let userStore = useUserStore()
+let $router = useRouter()
+let $route = useRoute()
+const changeIndex = (index, children) => {
+    currentIndex.value = index
+    let allH1 = document.querySelectorAll('.cur');
+    allH1[currentIndex.value].scrollIntoView({
+        behavior: 'smooth',
+    })
+}
+const clickDepartment = (item) => {
+    $router.push({
+        path: '/hospital/reservation',
+        query: {hoscode: $route.query.hoscode, depcode: item.depcode}
+    })
+}
 </script>
 
 <style scoped lang="scss">
 .register {
+  line-height: 1.5;
+
   .top {
     display: flex;
 
@@ -120,6 +165,69 @@ let hospitalDetail = useDetailStore();
       .ruleInfo {
         margin-top: 10px;
         color: #7f7f7f;
+      }
+    }
+  }
+
+  .department {
+    width: 100%;
+    height: 500px;
+    display: flex;
+    margin-top: 20px;
+
+    .leftNav {
+      width: 80px;
+      height: 100%;
+
+      ul {
+        width: 100%;
+        height: 100%;
+        background: rgb(248, 248, 248);
+        display: flex;
+        flex-direction: column;
+
+        li {
+          flex: 1;
+          text-align: center;
+          color: #7f7f7f;
+          font-size: 14px;
+          line-height: 40px;
+
+          &.active {
+            border-left: 1px solid red;
+            color: red;
+            background: white;
+          }
+        }
+      }
+    }
+
+    .departmentInfo {
+      flex: 1;
+      margin-left: 20px;
+      height: 100%;
+      overflow: auto;
+
+      &::-webkit-scrollbar {
+        display: none;
+      }
+
+      h1 {
+        margin-top: 10px;
+        background: rgb(248 248 248);
+        color: #7f7f7f;
+      }
+
+      ul {
+        display: flex;
+        flex-wrap: wrap;
+
+        li {
+          width: 33%;
+          color: #7f7f7f;
+          line-height: 30px;
+          font-size: 13px;
+        }
       }
     }
   }

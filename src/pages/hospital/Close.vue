@@ -1,13 +1,22 @@
 <template>
-    <div>停诊信息</div>
+    <div class="close">
+        <h1>{{ hospitalDetail.hospitalInfo.hospital?.hosname }}停诊信息</h1>
+        <el-empty description="暂无停诊信息"/>
+    </div>
 </template>
 
-<script>
-export default {
-    name: "Close"
-}
+<script setup>
+import useDetailStore from "@/store/modules/hospitalDetails.js";
+
+let hospitalDetail = useDetailStore()
+
 </script>
 
-<style scoped>
-
+<style scoped lang="scss">
+.close {
+  h1 {
+    font-size: 30px;
+    text-align: center;
+  }
+}
 </style>

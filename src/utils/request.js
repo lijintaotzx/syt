@@ -4,6 +4,7 @@
 // 3. 响应拦截器，简化服务器返回的数据，处理http的网络错误
 import axios from 'axios'
 import {ElMessage} from "element-plus";
+import useUserStore from "@/store/modules/user.js";
 
 
 // 创建axios实例
@@ -19,6 +20,10 @@ request.interceptors.request.use((config) => {
     // 配置headers中的token
     // config.headers.token =
     // 请求拦截器回调注入的对象，必须返回
+    let userStore = useUserStore()
+    if (userStore.userInfo.token) {
+        config.headers.token = userStore.userInfo.token
+    }
     return config
 })
 

@@ -5,20 +5,23 @@
             <router-view></router-view>
         </div>
         <HospitalBottom/>
+        <login v-if="userStore.visible"/>
     </div>
-
 </template>
 
-<script>
+<script setup>
 import MyTest from "@/components/MyTest.vue";
+import useUserStore from "@/store/modules/user.js";
+
+let userStore = useUserStore();
 
 
-export default {
-    name: "App",
-    components: {MyTest},
-    setup() {
-    }
-}
+// export default {
+//     name: "App",
+//     components: {MyTest},
+//     setup() {
+//     }
+// }
 </script>
 
 <style scoped lang="scss">

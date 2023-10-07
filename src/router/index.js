@@ -35,6 +35,40 @@ export default createRouter({
                     path: 'search',
                     component: () => import('@/pages/hospital/Search.vue')
                 },
+                {
+                    path: 'reservation',
+                    component: () => import('@/pages/hospital/Reservation.vue')
+                },
+                {
+                    path: 'reservation_confirm',
+                    component: () => import('@/pages/hospital/ReservationConfirm.vue')
+                },
+            ]
+        },
+        {
+            path: '/member',
+            component: () => import('@/pages/member/index.vue'),
+            children: [
+                {
+                    path: 'authentication',
+                    component: () => import('@/pages/member/Authentication.vue')
+                },
+                {
+                    path: 'order',
+                    component: () => import('@/pages/member/Order.vue')
+                },
+                {
+                    path: 'users',
+                    component: () => import('@/pages/member/Users.vue')
+                },
+                {
+                    path: 'information',
+                    component: () => import('@/pages/member/Information.vue')
+                },
+                {
+                    path: 'feedback',
+                    component: () => import('@/pages/member/Feedback.vue')
+                },
             ]
         },
         {
